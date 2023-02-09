@@ -1,3 +1,19 @@
+## Building project
+To build this project run
+```
+wasm-pack build
+```
+Then inside `www`
+```
+npm ci
+```
+Using `file:` directive inside `package.json` we can simply `import` files created on previous step.
+
+## Notes
+After running `wasm-pack build` typescript server in vscode panics. Reloading helps.
+You cannot run `npm ci` when Vite is running. Soooo, automated script to reinstall `wasm dependencies` in big no no. At least right now.
+At least `wasm-pack build` will find cargo file in parent directory, so one `cd ..` less to compile rust code. Not sure if it will work when `www` and rust code will be in same direcotry.
+
 <div align="center">
 
   <h1><code>wasm-pack-template</code></h1>

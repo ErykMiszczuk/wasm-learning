@@ -15,6 +15,6 @@ extern {
 
 #[wasm_bindgen]
 pub fn greet(name: &str) {
-    let msg = format!("Hello, wasm-game-of-life! {} here!", name);
+    let msg = format!("Hello, wasm-game-of-life! Your boy {} here!", name);
     alert(&msg);
 }
