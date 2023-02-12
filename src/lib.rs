@@ -1,5 +1,8 @@
 mod utils;
 
+use std::mem;
+
+use js_sys;
 use wasm_bindgen::prelude::*;
 
 // When the `wee_alloc` feature is enabled, use `wee_alloc` as the global
@@ -82,8 +85,11 @@ impl Universe {
         self.height
     }
 
-    pub fn cells(&self) -> *const Cell {
-        self.cells.as_ptr()
+    pub fn cells(&self) -> js_sys::Uint8Array {
+        unsafe {
+            let u8_cells = mem::transmute::<&Vec<Cell>, &Vec<u8>>(&self.cells);
+            js_sys::Uint8Array::view(&u8_cells)
+        }
     }
 
     pub fn render(&self) -> String {

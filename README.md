@@ -9,10 +9,14 @@ npm ci
 ```
 Using `file:` directive inside `package.json` we can simply `import` files created on previous step.
 
-## Notes
+## Notes   
 After running `wasm-pack build` typescript server in vscode panics. Reloading helps.
 You cannot run `npm ci` when Vite is running. Soooo, automated script to reinstall `wasm dependencies` in big no no. At least right now.
-At least `wasm-pack build` will find cargo file in parent directory, so one `cd ..` less to compile rust code. Not sure if it will work when `www` and rust code will be in same direcotry.
+At least `wasm-pack build` will find cargo file in parent directory, so one `cd ..` less to compile rust code. Not sure if it will work when `www` and rust code will be in same direcotry.   
+
+~~ Well it looks like `vite-plugin-wasm` have some problems folowing file resolutions for modules defined using `file:..` directive. Should be investigated more. ~~
+It turns out that it also have problems with `../../` like paths soo i have to flatten the structure of project.
+
 
 <div align="center">
 

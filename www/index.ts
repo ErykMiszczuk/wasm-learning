@@ -1,7 +1,6 @@
-import { Universe, Cell } from "wasm-game-of-life";
-import * as wasmModule from "wasm-game-of-life/wasm_game_of_life_bg.wasm"
+import { Universe, Cell } from "../pkg/wasm_game_of_life";
 
-const CELL_SIZE = 5;
+const CELL_SIZE = 7;
 const GRID_COLOR = "#CCCCCC";
 const DEAD_COLOR = "#FFFFFF";
 const ALIVE_COLOR = "#000000";
@@ -12,6 +11,8 @@ const width = universe.width();
 const height = universe.height();
 canvas.height = (CELL_SIZE + 1) * height + 1;
 canvas.width = (CELL_SIZE + 1) * width + 1;
+
+universe.tick()
 
 const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
 
@@ -37,8 +38,7 @@ const getIndex = (row: number, column: number): number => {
 };
 
 const drawCells = () => {
-    const cellsPtr = universe.cells();
-    const cells = new Uint8Array(wasmModule.memory.buffer, cellsPtr, width * height);
+    const cells = universe.cells();
 
     ctx.beginPath();
 
